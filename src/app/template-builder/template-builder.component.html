@@ -1,1 +1,61 @@
-<p>template-builder works!</p>
+
+<div class="template-builder">
+  <!-- Header Toolbar -->
+  <mat-toolbar color="primary">
+    <span>Template Builder with Drag and Drop</span>
+  </mat-toolbar>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Action Buttons -->
+    <div class="buttons">
+      <button mat-raised-button color="primary" [matTooltip]="'Add Text Input'"
+        (click)="addSection('text')">
+        <mat-icon>text_fields</mat-icon>
+        <span>Text</span>
+      </button>
+
+      <button mat-raised-button color="primary" [matTooltip]="'Add Email Input'"
+        (click)="addSection('email')">
+        <mat-icon>email</mat-icon>
+        <span>Email</span>
+      </button>
+
+      <button mat-raised-button color="primary" [matTooltip]="'Add Image Input'"
+        (click)="addSection('image')">
+        <mat-icon>image</mat-icon>
+        <span>Image</span>
+      </button>
+
+      <button mat-raised-button color="primary" [matTooltip]="'Add Video Input'"
+        (click)="addSection('video')">
+        <mat-icon>videocam</mat-icon>
+        <span>Video</span>
+      </button>
+
+      <button mat-raised-button color="primary"
+        [matTooltip]="'Add Textarea Input'"
+        (click)="addSection('textarea')">
+        <mat-icon>text_fields</mat-icon>
+        <span>Text Area</span>
+      </button>
+    </div>
+
+    <!-- Drag and Drop Container -->
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+      <div *ngIf="sections.length === 0" class="empty-state">
+        <p>Add sections using the buttons above</p>
+      </div>
+      <div *ngFor="let section of sections; let i = index"
+        cdkDrag
+        class="section">
+        <app-section
+          [section]="section"
+          (delete)="deleteSection(i)"
+          (update)="updateContent(i, $event)"
+          (updateVideo)="updateContents(i, $event)">
+        </app-section>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+// Variables
+$primary-color: #3f51b5;
+$background-color: #fff;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+$spacing-unit: 8px;
+
+// Mixins
+@mixin box-shadow($opacity: 0.1) {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, $opacity);
+}
+
+@mixin flex-container($direction: row, $justify: flex-start, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Main container styles
+.container {
+  max-width: 40%;
+  margin: $spacing-unit * 2.5 auto;
+  background: $background-color;
+  padding: $spacing-unit * 2.5;
+  border-radius: $border-radius;
+  @include box-shadow();
+
+  // Nested elements
+  .buttons {
+    @include flex-container(column, center, normal);
+    gap: $spacing-unit * 1.25;
+    margin: $spacing-unit * 1.875;
+
+    // Button hover effects
+    button {
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .section {
+    background: $background-color;
+    padding: $spacing-unit * 1.25;
+    margin-bottom: $spacing-unit * 1.25;
+    border-radius: $border-radius / 2;
+    @include box-shadow(0.2);
+    position: relative;
+    cursor: move;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    // Drag animation
+    &.cdk-drag-animating {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+}
+
+// Drag drop styles
+.cdk-drag-preview {
+  @include box-shadow(0.2);
+  background: $background-color;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Media queries
+@media (min-width: 768px) {
+  .container {
+    .buttons {
+      @include flex-container(row, space-around);
+      margin-bottom: $spacing-unit * 1.875;
+    }
+  }
+}
+
+// Optional: Add responsive adjustments for smaller screens
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+    padding: $spacing-unit * 1.5;
+  }
+}
