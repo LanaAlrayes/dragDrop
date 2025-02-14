@@ -1,0 +1,73 @@
+// Variables
+$spacing-base: 15px;
+$delete-button-color: red;
+$form-field-width: 50%;
+$form-field-height: 80px;
+
+// Mixins
+@mixin full-width {
+  width: 100%;
+}
+
+@mixin position-absolute($top, $right) {
+  position: absolute;
+  top: $top;
+  right: $right;
+}
+
+// Delete button styles
+.delete-btn {
+  @include position-absolute(5px, 5px);
+  color: $delete-button-color;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Form field styles
+.example-full-width {
+  width: $form-field-width;
+  height: $form-field-height;
+
+  // Media query for responsive design
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+// Container styles
+div {
+  padding: $spacing-base 0 0 $spacing-base;
+}
+
+// Media elements
+textarea,
+input,
+img,
+iframe {
+  @include full-width;
+}
+
+// Additional styles for better visual appearance
+img {
+  max-height: 200px;
+  object-fit: contain;
+  margin-top: $spacing-base;
+  border-radius: 4px;
+}
+
+iframe {
+  height: 315px;
+  margin-top: $spacing-base;
+  border-radius: 4px;
+}
+
+// Optional: Add styles for form field states
+.mat-form-field {
+  &.mat-focused {
+    .mat-form-field-outline {
+      color: primary;
+    }
+  }
+}

@@ -1,1 +1,53 @@
-<p>section works!</p>
+<mat-card-title>{{section.type | titlecase}}</mat-card-title>
+<button mat-icon-button class="delete-btn" (click)="deleteSection()">
+  <mat-icon>delete</mat-icon>
+</button>
+
+<!-- Add Text Input -->
+<div *ngIf="section.type === 'text'">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <input matInput type="text" placeholder="Placeholder"
+      [(ngModel)]="section.content"
+      (input)="updateContent()">
+  </mat-form-field>
+</div>
+
+<!-- Add Email Input -->
+<div *ngIf="section.type === 'email'">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <input matInput type="email" placeholder="pat@example.com"
+      [(ngModel)]="section.content"
+      (input)="updateContent()">
+  </mat-form-field>
+</div>
+
+<!-- Add Image Input -->
+<div *ngIf="section.type === 'image'">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <input matInput type="text" placeholder="Image URL"
+      [(ngModel)]="section.content"
+      (input)="updateContent()">
+  </mat-form-field>
+  <img *ngIf="section.content" [src]="section.content" alt="User Image">
+</div>
+
+<!-- Add Video Input -->
+<div *ngIf="section.type === 'video'">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <input matInput type="text"
+      placeholder="YouTube Embed URL"
+      [(ngModel)]="section.content"
+      (input)="updateContents()">
+  </mat-form-field>
+  <iframe *ngIf="section.content" [src]="section.content | safeUrl"
+    frameborder="0" allowfullscreen></iframe>
+</div>
+
+<!-- Add Textarea Input -->
+<div *ngIf="section.type === 'textarea'">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <textarea matInput [(ngModel)]="section.content"
+      (input)="updateContent()"
+      maxlength="300"></textarea>
+  </mat-form-field>
+</div>
