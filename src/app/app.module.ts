@@ -4,12 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SectionComponent } from './section/section.component';
 import { TemplateBuilderComponent } from './template-builder/template-builder.component';
+import { SafeUrlPipe } from './safe-url.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SectionComponent,
-    TemplateBuilderComponent
+    TemplateBuilderComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule
