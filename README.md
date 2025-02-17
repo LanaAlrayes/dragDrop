@@ -21,7 +21,8 @@ This project is an Angular web application that allows users to build templates 
 - Use Angular Material and CDK (Component Dev Kit) for UI components and drag-and-drop functionality.
 
 # Features
-- Drag and drop interface for rearranging sections.
+- Dragged between the left and right containers.
+- Drag and drop to reorder sections.
 - Three types of sections: text, textarea, image, video, and email.
 - Add new sections of any type.
 - Delete existing sections.
