@@ -9,20 +9,25 @@ $form-field-height: 80px;
   width: 100%;
 }
 
-@mixin position-absolute($top, $right) {
-  position: absolute;
+@mixin position-absolute ($top, $right) {
+  position: relative;
   top: $top;
-  right: $right;
+  left: $right;
 }
 
 // Delete button styles
 .delete-btn {
-  @include position-absolute(5px, 5px);
+  @include position-absolute(5px, 90%);
   color: $delete-button-color;
 
   &:hover {
     opacity: 0.8;
   }
+
+  @media (max-width: 768px) {
+    @include position-absolute(5px, 70%);
+  }
+
 }
 
 // Form field styles

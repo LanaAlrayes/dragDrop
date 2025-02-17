@@ -1,4 +1,3 @@
-
 <div class="template-builder">
   <!-- Header Toolbar -->
   <mat-toolbar color="primary">
@@ -7,54 +6,81 @@
 
   <!-- Main Container -->
   <div class="container">
-    <!-- Action Buttons -->
-    <div class="buttons">
-      <button mat-raised-button color="primary" [matTooltip]="'Add Text Input'"
-        (click)="addSection('text')">
-        <mat-icon>text_fields</mat-icon>
-        <span>Text</span>
-      </button>
+    <!-- Left Container -->
+    <div class="container-left">
+      <div class="buttons">
+        <button mat-raised-button color="primary"
+          [matTooltip]="'Add Text Input'" (click)="addSection('text')">
+          <mat-icon>text_fields</mat-icon>
+          <span>Text</span>
+        </button>
+        <button mat-raised-button color="primary"
+          [matTooltip]="'Add Email Input'" (click)="addSection('email')">
+          <mat-icon>email</mat-icon>
+          <span>Email</span>
+        </button>
+        <button mat-raised-button color="primary"
+          [matTooltip]="'Add Image Input'" (click)="addSection('image')">
+          <mat-icon>image</mat-icon>
+          <span>Image</span>
+        </button>
+        <button mat-raised-button color="primary"
+          [matTooltip]="'Add Video Input'" (click)="addSection('video')">
+          <mat-icon>videocam</mat-icon>
+          <span>Video</span>
+        </button>
+        <button mat-raised-button color="primary"
+          [matTooltip]="'Add Textarea Input'" (click)="addSection('textarea')">
+          <mat-icon>text_fields</mat-icon>
+          <span>Text Area</span>
+        </button>
+      </div>
 
-      <button mat-raised-button color="primary" [matTooltip]="'Add Email Input'"
-        (click)="addSection('email')">
-        <mat-icon>email</mat-icon>
-        <span>Email</span>
-      </button>
-
-      <button mat-raised-button color="primary" [matTooltip]="'Add Image Input'"
-        (click)="addSection('image')">
-        <mat-icon>image</mat-icon>
-        <span>Image</span>
-      </button>
-
-      <button mat-raised-button color="primary" [matTooltip]="'Add Video Input'"
-        (click)="addSection('video')">
-        <mat-icon>videocam</mat-icon>
-        <span>Video</span>
-      </button>
-
-      <button mat-raised-button color="primary"
-        [matTooltip]="'Add Textarea Input'"
-        (click)="addSection('textarea')">
-        <mat-icon>text_fields</mat-icon>
-        <span>Text Area</span>
-      </button>
+      <!-- Left Drop List -->
+      <div cdkDropList
+        #leftList="cdkDropList"
+        [cdkDropListData]="sections"
+        [cdkDropListConnectedTo]="[rightList]"
+        class="drop-list"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngIf="sections.length === 0" class="empty-state">
+          <p>Add sections using the buttons above</p>
+        </div>
+        <div *ngFor="let section of sections; let i = index"
+          cdkDrag
+          class="section">
+          <app-section
+            [section]="section"
+            (delete)="deleteSection(i, 'left')"
+            (update)="updateContent(i, $event)"
+            (updateVideo)="updateContents(i, $event)">
+          </app-section>
+        </div>
+      </div>
     </div>
 
-    <!-- Drag and Drop Container -->
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-      <div *ngIf="sections.length === 0" class="empty-state">
-        <p>Add sections using the buttons above</p>
-      </div>
-      <div *ngFor="let section of sections; let i = index"
-        cdkDrag
-        class="section">
-        <app-section
-          [section]="section"
-          (delete)="deleteSection(i)"
-          (update)="updateContent(i, $event)"
-          (updateVideo)="updateContents(i, $event)">
-        </app-section>
+    <!-- Right Container -->
+    <div class="container-right">
+      <h2>Completed Sections</h2>
+      <div cdkDropList
+        #rightList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[leftList]"
+        class="drop-list"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngIf="done.length === 0" class="empty-state">
+          <p>Drag items here</p>
+        </div>
+        <div *ngFor="let section of done; let i = index"
+          cdkDrag
+          class="section">
+          <app-section
+            [section]="section"
+            (delete)="deleteSection(i, 'right')"
+            (update)="updateContentDone(i, $event)"
+            (updateVideo)="updateContentsDone(i, $event)">
+          </app-section>
+        </div>
       </div>
     </div>
   </div>

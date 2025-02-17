@@ -1,7 +1,7 @@
-<mat-card-title>{{section.type | titlecase}}</mat-card-title>
 <button mat-icon-button class="delete-btn" (click)="deleteSection()">
   <mat-icon>delete</mat-icon>
 </button>
+<mat-card-title>{{section.type | titlecase}}</mat-card-title>
 
 <!-- Add Text Input -->
 <div *ngIf="section.type === 'text'">
